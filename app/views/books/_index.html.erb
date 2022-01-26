@@ -34,7 +34,8 @@
           </p>
           <% end %>
         </td>
-
+        <td> <p><%= "コメント数:#{book.book_comments.count}"%></p></td>
+        <!--book(eachのbook).book_comments(book_commentsテーブルに保存されてるコメントの意味)-->
       </tr>
     <% end %>
   </tbody>

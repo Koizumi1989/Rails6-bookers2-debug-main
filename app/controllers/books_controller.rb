@@ -2,10 +2,13 @@ class BooksController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def show
+    @book_comment = BookComment.new
     @book_new = Book.new
     @book = Book.find(params[:id])
     @user = @book.user
     #@bookに対応するユーザーを持ってくる　@user = @book.user（アソシエーションのuser)
+    # @book_comments = @book.book_comments
+    # book_commentはアソシエーションhas_many book_commentのこと
   end
 
   def index
