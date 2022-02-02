@@ -1,0 +1,35 @@
+<p>_follow_list.html.erb</p>
+
+<div class ="container">
+  <div class ="row">
+    <div class ="col">
+      <% if users.exists? %>
+        <% users.each do |user| %>
+<!--オブジェクト.exists?(条件)-->
+<!--exists?メソッドとは、指定した条件のレコードがデータベースに-->
+<!--存在するかどうかを真偽値で返すメソッドです。存在すればtrueを存在しなければfalseを返します。-->
+          <table class ='table table-hover table-inverse'>
+            <thead>
+              <tr>
+                <th>image</th>
+                <th>name</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+                <td><%= user.name %></td>
+                <td>フォロー数: <%= user.followings.count %></td>
+                <td>フォロワー数: <%= user.followers.count %></td>
+                <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
+              </tr>
+            </tbody>
+          </table>
+        <% end %>
+      <% else %>
+        <p>ユーザーはいません</p>
+      <% end %>
+      </div>
+    </div>
+  </div>

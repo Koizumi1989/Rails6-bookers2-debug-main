@@ -9,6 +9,32 @@ class User < ApplicationRecord
   has_many:book_comments,dependent: :destroy
   has_one_attached :profile_image
 
+  # フォローをした、されたの関係
+  #class_name:関連名と参照元のクラス名を異なるものにしたい場合につかう。
+  #foreign_key:参照元のテーブルに定義されている外部キーの名前を指定
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+
+  # 一覧画面で使う
+  #下記の意味followingsは中間テーブルrelationshipsを経由して、follwedを参照している。
+  #through:結合モデルの指定
+  #source:	has_many :through の元となるオブジェクトを指定
+  has_many :followings, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+
+  # フォローしたときの処理
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+  # フォローを外すときの処理
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+  # フォローしているか判定
+  def following?(user)
+    followings.include?(user)
+  end
+
   validates :name, presence: true, length: {minimum: 2,maximum: 20},uniqueness: true
   validates :introduction,length: {maximum: 50}
 

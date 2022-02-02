@@ -57,6 +57,7 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title,:body)
   end
 
+  # 他人のユーザー画面に遷移できないようにする。
   def correct_user
     @book = Book.find(params[:id])
     @user = @book.user
