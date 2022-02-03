@@ -34,6 +34,30 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+  
+# 検索方法分岐
+# 送られてきたsearchによって条件分岐させましょう。
+# あいまい検索　whereでdbから該当データ取得
+# モデルクラス.where("列名 LIKE ?", "%値%")  値(文字列)を含む
+# モデルクラス.where("列名 LIKE ?", "値_")   値(文字列)と末尾の1文字
+
+  def self.looks(search, word)
+      # 完全一致→perfect_match
+    if search == "perfect_match"
+      @user = User.where("name LIKE?", "#{word}")
+      # 前方一致→forward_match
+    elsif search == "forward_match"
+      @user = User.where("name LIKE?","#{word}%")
+      # 後方一致→backword_match
+    elsif search == "backward_match"
+      @user = User.where("name LIKE?","%#{word}")
+      # 部分一致→partial_match
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
+  end
 
   validates :name, presence: true, length: {minimum: 2,maximum: 20},uniqueness: true
   validates :introduction,length: {maximum: 50}
