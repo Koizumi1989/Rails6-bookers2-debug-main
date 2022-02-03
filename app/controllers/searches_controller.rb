@@ -7,7 +7,9 @@ class SearchesController < ApplicationController
 # 　検索方法→params[:search]
 # 　検索ワード→params[:word]
 
-  def search
+  def search_result
+    @word =(params[:word])
+
     @range = params[:range]
 
     if @range == "User"
