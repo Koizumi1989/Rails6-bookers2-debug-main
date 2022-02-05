@@ -23,21 +23,11 @@
             <% end %>
 
             <td>
-              <!--ログインしているユーザーがいいねを押した状態だと白、まだ押してないと黒。-->
-              <% if @book.favorited_by?(current_user) %>
-              <p>
-                <%= link_to book_favorites_path(@book), method: :delete do %>
-                  ♥<%= @book.favorites.count %>
-                <% end %>
-              </p>
-              <% else %>
-              <p>
-                <%= link_to book_favorites_path(@book), method: :post do %>
-                  ♡<%= @book.favorites.count %>
-                <% end %>
-              </p>
-              <% end %>
+              <div class= <%= 'favorite_'+ @book.id.to_s %> >
+                <%= render 'favorites/favorite', book: @book %>
+              </div>
             </td>
+
             <td> <p><%= "コメント数:#{@book.book_comments.count}"%></p></td>
         </tr>
       </table>
