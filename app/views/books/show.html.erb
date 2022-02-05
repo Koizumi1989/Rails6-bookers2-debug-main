@@ -41,35 +41,13 @@
             <td> <p><%= "コメント数:#{@book.book_comments.count}"%></p></td>
         </tr>
       </table>
+<!--追記-->
+      <div class = "comment-table">
+        <%= render 'book_comments/book_comments_index', book: @book %>
+      </div>
 
-      <table>
-        <!--<p>コメント数：<%#= @book_comments.count %></p>-->
-        <% @book.book_comments.each do |book_comment| %>
-        <tr>
-          <td>
-          <p><%= image_tag book_comment.user.get_profile_image %></p>
-          <%= link_to book_comment.user.name,user_path(book_comment.user_id) %>
-          </td>
-          <!--book_commentのuserの名前-->
-          <!--user.name(modelのuserでnameはuserテーブルのカラム-->
-          <td><%= book_comment.comment %></td>
-          <!--book_commentのcomment-->
-
-          <td>
-          <% if book_comment.user == current_user %>
-          <%= link_to "Destroy", book_book_comment_path(book_comment.book,book_comment), method: :delete,class: "btn btn-sm btn-danger"%>
-          <!--パスの後にidつけつかつけないかはrails routesのurlの後に:idがついているかどうか-->
-          <% end %>
-          </td>
-        </tr>
-        <% end %>
-      </table>
-
-      <div>
-        <%= form_with model: [@book, @book_comment], local: true do |f| %>
-          <%= f.text_area :comment,class: "form-control" %>
-          <%= f.submit "送信" %>
-        <% end %>
+      <div class = "comment">
+        <%= render 'book_comments/book_comments_form', book: @book,book_comment: @book_comment %>
       </div>
 
     </div>
