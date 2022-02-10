@@ -1,5 +1,12 @@
 class RelationshipsController < ApplicationController
 
+  # paramsはurlのidをとってくる。relationshipsのcreateのurlは
+  # POST /users/:user_id/relationships(.:format)となっており、
+  # paramsで取得するidはuser_idとなる。
+  # なぜidではなくuser_idになっているのか？ネストしているから。
+  # ここでidとしてしまうとrelationship/controller内なので
+  # relationshipのidが取れてしまう。まぎらわしくないよう
+  # railsがpostのidをuser_idにしてくれている。
   #フォローする時
   def create
     current_user.follow(params[:user_id])

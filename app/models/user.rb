@@ -21,7 +21,9 @@ class User < ApplicationRecord
   #source:	has_many :through の元となるオブジェクトを指定
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
+  #逆になる？
 
+  #()ないの意味はここで自分で指定しているだけ
   # フォローしたときの処理
   def follow(user_id)
     relationships.create(followed_id: user_id)
@@ -34,7 +36,7 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
+
 # 検索方法分岐
 # 送られてきたsearchによって条件分岐させましょう。
 # あいまい検索　whereでdbから該当データ取得

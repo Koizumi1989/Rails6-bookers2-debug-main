@@ -19,9 +19,20 @@
           <%= image_tag book.user.get_profile_image, size:'50x50' %>
           <% end %>
         </td>
-        <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
+
+        <!--book.title,book,意味-->
+        <td><%= link_to book.title,book %></td>
+        <!--railsの仕様上showへのリンクは自動で判断してくれるためbookのみでもいける-->
+        <!--book.title,bookの,book部分はpathでshowへのリンクの場合は、book-->
+        <!--だけでshowへ飛べるがそれ以外（例えばedit)とかに飛びたい場合は、-->
+        <!--パスを丁寧にかかないといけない。よって、下記記述と同じ-->
+        <!--上はbook.idと丁寧に記載している。-->
+        <!--下はbookの全部のレコードを記載している。id入っているため。-->
+        <!--<td><%#= link_to book.title,book_path(book.id) %></td>-->
+        <!--<td><%#= link_to book.title,book_path(book) %></td>-->
         <td><%= book.body %></td>
 
+        <!--ここ-->
         <td>
           <div class= <%= 'favorite_'+ book.id.to_s %> >
             <%= render 'favorites/favorite', book: book %>
