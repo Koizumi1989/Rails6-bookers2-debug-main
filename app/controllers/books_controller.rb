@@ -6,7 +6,7 @@ class BooksController < ApplicationController
     @book_new = Book.new
     @book = Book.find(params[:id])
     @user = @book.user
-    #@bookに対応するユーザーを持ってくる　@user = @book.user（アソシエーションのuser)
+    # @bookに対応するユーザーを持ってくる　@user = @book.user（アソシエーションのuser)
     # @book_comments = @book.book_comments
     # book_commentはアソシエーションhas_many book_commentのこと
   end
@@ -54,7 +54,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title,:body)
+    params.require(:book).permit(:title, :body)
   end
 
   # 他人のユーザー画面に遷移できないようにする。

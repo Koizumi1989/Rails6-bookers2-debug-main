@@ -1,6 +1,10 @@
 inherit_from:
   - .rubocop_airbnb.yml
 
+# 文字の長さ120までに変更
+LineLength:
+  Max: 120
+
 #ここにはrubocopでコード解析したくないファイルやフォルダを指定します
 AllCops:
   Exclude:
