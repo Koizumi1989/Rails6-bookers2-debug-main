@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   root :to =>"homes#top"
   get "home/about"=>"homes#about"
   get "search" => "searches#search_result"
+  
+  # ゲストログイン
+  devise_scope :user do
+    post 'users/guest_sign_in' => 'users/sessions#guest_sign_in'
+  end
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update]do
     resource :favorites,only:[:create,:destroy]

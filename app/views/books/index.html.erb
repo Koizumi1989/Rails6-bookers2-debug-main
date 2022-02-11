@@ -1,6 +1,7 @@
 <p>books/index.html.erb</p>
 <div class='container px-5 px-sm-0'>
-        <div class ="alert">
+  
+  <div id="error_explanation">
     <% if @book.errors.any? %>
       <h2><%= @book.errors.count %>errors prohibited this obj being saved:</h2>
       <ul>
@@ -10,6 +11,7 @@
       </ul>
     <% end %>
   </div>
+
   <div class='row'>
     <div class='col-md-3'>
       <h2>User info</h2>

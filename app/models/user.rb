@@ -23,6 +23,26 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
   #逆になる？
 
+# ゲストログイン
+# ◆find_or_create_byとは？
+# find_or_create_byは、データの検索と作成を自動的に判断して処理を行う、Railsのメソッドです。
+# 具体的には、find_or_create_by(条件)の条件としたデータが存在するかどうかを判断した上で
+# ・存在する場合には、そのデータを返す
+# ・存在しない場合は、新規作成する
+# という判断と処理を行います。
+# また、find_or_create_by!の「!」を付与することで、処理がうまくいかなかった場合にエラーが発生するようになり、結果不具合を検知しやすくなります。
+# SecureRandom.urlsafe_base64とは？
+# SecureRandom.urlsafe_base64は、ランダムな文字列を生成するRubyのメソッドの一種です。
+
+# パスワードはSecureRandom.urlsafe_base64でランダムな文字列にすることができます。
+# またnameは"guestuser"と固定しています。
+  def self.guest
+    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
+
   #()ないの意味はここで自分で指定しているだけ
   # フォローしたときの処理
   def follow(user_id)
