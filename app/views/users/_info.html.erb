@@ -20,11 +20,11 @@
 </table>
 <!--ユーザーの名前がguestuserではない場合にはボタンを表示します。-->
 <!--すなわち、ユーザーの名前がguestuserである場合には、表示しません。-->
-  <% if !(user.name == "guestuser") %>
-  <div class='row'>
-    <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
-  </div>
-  <% end %>
+  <!--<%# if !(user.name == "guestuser") %>-->
+  <!--<div class='row'>-->
+  <!--  <%#= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>-->
+  <!--</div>-->
+  <!--<%# end %>-->
 
   <% if current_user.id != user.id %>
     <% if current_user.following?(user) %>
