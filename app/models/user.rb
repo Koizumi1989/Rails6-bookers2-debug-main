@@ -7,9 +7,14 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
-  
+
   has_many :book_comments, dependent: :destroy
   has_one_attached :profile_image
+
+  # チャット機能
+  has_many :user_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
+
 
   # フォローをした、されたの関係
   # class_name:関連名と参照元のクラス名を異なるものにしたい場合につかう。
