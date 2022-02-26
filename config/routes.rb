@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in' => 'users/sessions#guest_sign_in'
   end
 
-
   # チャット機能
   get 'chat/:id', to: 'chats#show', as: 'chat'
   resources :chats, only: [:create]

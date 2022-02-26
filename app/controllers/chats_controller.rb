@@ -1,4 +1,10 @@
 class ChatsController < ApplicationController
+
+  def create
+    @chat = current_user.chats.new(chat_params)
+    @chat.save
+  end
+
   def show
   #BさんのUser情報を取得
    @user = User.find(params[:id])
@@ -29,11 +35,6 @@ class ChatsController < ApplicationController
    #form_withでチャットを送信する際に必要な空のインスタンス
    #ここでroom.idを@chatに代入しておかないと、form_withで記述するroom_idに値が渡らない
     @chat = Chat.new(room_id: room.id)
-  end
-
-  def create
-    @chat = current_user.chats.new(chat_params)
-    @chat.save
   end
 
   private
