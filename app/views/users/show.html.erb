@@ -54,6 +54,29 @@
           </tr>
         </tbody>
       </table>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>6日</th>
+            <th>5日</th>
+            <th>4日</th>
+            <th>3日</th>
+            <th>2日</th>
+            <th>今日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @book_6day.count %></td>
+            <td><%= @book_5day.count %></td>
+            <td><%= @book_4day.count %></td>
+            <td><%= @book_3day.count %></td>
+            <td><%= @yesterday_book.count %></td>
+            <td><%= @today_book.count %></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
