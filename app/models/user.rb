@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :books, dependent: :destroy
+  has_many :group_users
+  has_many :groups, through: :group_users
+  # userは、group_usersという中間テーブルを通じてgroupsにアクセスできるという記述
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
 
