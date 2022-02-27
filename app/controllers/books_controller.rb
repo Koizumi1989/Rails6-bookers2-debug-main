@@ -1,6 +1,9 @@
 class BooksController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
+  # 閲覧数　いらない
+  # impressionist :actions => [:show]
+
   def show
     @book_comment = BookComment.new
     @book_new = Book.new
@@ -9,6 +12,9 @@ class BooksController < ApplicationController
     # @bookに対応するユーザーを持ってくる　@user = @book.user（アソシエーションのuser)
     # @book_comments = @book.book_comments
     # book_commentはアソシエーションhas_many book_commentのこと
+
+    # 閲覧数
+    impressionist(@book, nil, unique: [:session_hash])
   end
 
   def index
