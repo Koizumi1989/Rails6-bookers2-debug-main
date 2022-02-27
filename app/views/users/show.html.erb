@@ -58,11 +58,15 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>6日</th>
-            <th>5日</th>
-            <th>4日</th>
-            <th>3日</th>
-            <th>2日</th>
+            <th colspan="6">7日分の投稿数</th>
+          </tr>
+          <tr>
+            <th>6日前</th>
+            <th>5日前</th>
+            <th>4日前</th>
+            <th>3日前</th>
+            <th>2日前</th>
+            <th>1日前</th>
             <th>今日</th>
           </tr>
         </thead>
@@ -72,12 +76,54 @@
             <td><%= @book_5day.count %></td>
             <td><%= @book_4day.count %></td>
             <td><%= @book_3day.count %></td>
+            <td><%= @book_2day.count %></td>
             <td><%= @yesterday_book.count %></td>
             <td><%= @today_book.count %></td>
           </tr>
         </tbody>
       </table>
+
+      <div style= "width:765px; height:500px;">
+      <script src ="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+      <canvas id="myChart"></canvas>
+        <script>
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
+                    datasets: [{
+                        label: "投稿した本の数",
+                        data: [<%= @book_6day.count %>,
+                              <%= @book_5day.count %>,
+                              <%= @book_4day.count %>,
+                              <%= @book_3day.count %>,
+                              <%= @book_2day.count %>,
+                              <%= @yesterday_book.count %>,
+                              <%= @today_book.count %>],
+                        backgroundColor: 'red',
+                        borderColor: 'blue',
+                        fill: false
+                    }]
+                },
+            });
+        </script>
+      </div>
+
+      <div>
+      <%= form_with url: user_search_path(@user), local: true, method: :get do |f| %>
+        <%= f.date_field :created_at %>
+        <%= f.submit '検索', class: 'btn btn-primary'  %>
+      <% end %>
+
+      <div id="search_result">
+        <% if @search_book.present? %>
+          <%= render 'users/search', search_book: @search_book %>
+        <% end %>
+      </div>
+      </div>
     </div>
   </div>
 </div>
+
 
