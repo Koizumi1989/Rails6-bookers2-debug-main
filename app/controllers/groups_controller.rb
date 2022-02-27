@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name, :introduction, :profile_image)
+    params.require(:group).permit(:name, :introduction, :image_id)
   end
 
   # オーナーのみ編集可能

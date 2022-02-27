@@ -10,7 +10,13 @@
       <h2>Group Detail</h2>
       <table class='table table-hover table-inverse'>
         <tr>
-          <td><%= image_tag group.get_image_id("50x50") %></td>
+          <td>
+            <% if @group.image_id.attached? %>
+              <%= image_tag @group.image_id, size: "50x50" %>
+            <% else %>
+              <%= image_tag 'no_image.jpg', size: "50x50" %>
+            <% end %>
+          </td>
           <td><%= @group.name %></td>
           <td><%= @group.introduction %></td>
           <td>
