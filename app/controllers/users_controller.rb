@@ -7,6 +7,11 @@ class UsersController < ApplicationController
     @book = Book.new
     @user = User.find(params[:id])
     @books = @user.books.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    @books_user =@user.books
+    @today_book = @books_user.created_today
+    @yesterday_book = @books_user.created_yesterday
+    @thisweek_book = @books_user.created_thisweek
+    @lastweek_book = @books_user.created_lastweek
   end
 
   def index
