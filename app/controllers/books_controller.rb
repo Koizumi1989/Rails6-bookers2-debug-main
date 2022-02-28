@@ -60,7 +60,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :rate)
   end
 
   # 他人のユーザー画面に遷移できないようにする。
