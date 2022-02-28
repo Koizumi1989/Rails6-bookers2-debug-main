@@ -1,17 +1,21 @@
 Rails.application.routes.draw do
-  get 'chats/show'
-  get 'relationships/followings'
-  get 'relationships/followers'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
   root :to => "homes#top"
   get "home/about" => "homes#about"
   get "search" => "searches#search_result"
 
+  get "users_search" => "users#search", as: "users_search"
+
   # ゲストログイン
   devise_scope :user do
     post 'users/guest_sign_in' => 'users/sessions#guest_sign_in'
   end
+
+  get 'chats/show'
+  get 'relationships/followings'
+  get 'relationships/followers'
 
   # チャット機能
   get 'chat/:id', to: 'chats#show', as: 'chat'
@@ -32,7 +36,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
   resources :groups do
     get "join" => "groups#join"
-    get "search" => "users#search"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
