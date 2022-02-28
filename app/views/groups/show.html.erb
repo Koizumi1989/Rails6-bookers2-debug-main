@@ -45,7 +45,11 @@
                 <%= link_to 'Join this group', group_join_path(@group), class: "btn btn-sm btn-success" %>
               <% end %>
             </td>
-            <td></td>
+            <td class="fa-2x pt-1">
+              <%= link_to group_new_mail_path(@group) do %>
+                <i class="fa fa-thin fa-envelope"></i>
+              <% end %>
+            </td>
           </tr>
         </tbody>
       </table>
